@@ -33,12 +33,12 @@ CREATE TABLE `log` (
 -- ----------------------------
 -- Records of log
 -- ----------------------------
-INSERT INTO `log` VALUES ('a9786c018d854226bdfa0ab74d4045cf', 'Amayadream', '2017-01-11 19:20:43', '登陆', '用户登陆', null);
-INSERT INTO `log` VALUES ('9136815071cc450ba00d9b693247dff2', 'Amayadream', '2017-01-11 19:21:26', '更新', '更新用户头像', null);
-INSERT INTO `log` VALUES ('2be39dd8511c41259bfa2885353e94ad', 'Amayadream', '2017-01-11 19:21:52', '登陆', '用户登陆', null);
-INSERT INTO `log` VALUES ('a48f35f8d3f84db1addc42cbf8835ac8', 'Amayadream', '2017-01-11 19:22:15', '登陆', '用户登陆', null);
-INSERT INTO `log` VALUES ('48083bcfca7b4dbdb7236561cc118839', 'Amayadream', '2017-01-11 19:22:18', '登陆', '用户登陆', null);
-INSERT INTO `log` VALUES ('2c83a3d453d94f83ac7595b4bb1fc2c6', 'Amayadream', '2017-01-11 19:22:21', '登陆', '用户登陆', null);
+INSERT INTO `log` VALUES ('a9786c018d854226bdfa0ab74d4045cf', 'yuudachi', '2017-01-11 19:20:43', '登陆', '用户登陆', null);
+INSERT INTO `log` VALUES ('9136815071cc450ba00d9b693247dff2', 'yuudachi', '2017-01-11 19:21:26', '更新', '更新用户头像', null);
+INSERT INTO `log` VALUES ('2be39dd8511c41259bfa2885353e94ad', 'yuudachi', '2017-01-11 19:21:52', '登陆', '用户登陆', null);
+INSERT INTO `log` VALUES ('a48f35f8d3f84db1addc42cbf8835ac8', 'yuudachi', '2017-01-11 19:22:15', '登陆', '用户登陆', null);
+INSERT INTO `log` VALUES ('48083bcfca7b4dbdb7236561cc118839', 'yuudachi', '2017-01-11 19:22:18', '登陆', '用户登陆', null);
+INSERT INTO `log` VALUES ('2c83a3d453d94f83ac7595b4bb1fc2c6', 'yuudachi', '2017-01-11 19:22:21', '登陆', '用户登陆', null);
 INSERT INTO `log` VALUES ('d05d2127977146dfbd0cf6076283c9e9', 'admin', '2017-01-11 19:23:20', '登陆', '用户登陆', null);
 INSERT INTO `log` VALUES ('19b6f5ec3d6a4a3aacbbae28ea23afd2', 'admin', '2017-01-11 19:24:04', '更新', '更新用户头像', null);
 
@@ -63,5 +63,5 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('Amayadream', '123456', 'Amayadream', '1', '23', 'upload/Amayadream/Amayadream.jpg', 'are you ok?', '2017-01-11 19:22:21', '2017-01-11 19:22:21', '1');
+INSERT INTO `user` VALUES ('yuudachi', '123456', 'yuudachi', '1', '23', 'upload/Amayadream/Amayadream.jpg', 'are you ok?', '2017-01-11 19:22:21', '2017-01-11 19:22:21', '1');
 INSERT INTO `user` VALUES ('admin', 'admin', 'admin', '1', '23', 'upload/admin/admin.jpg', 'i\'m admin', '2017-01-11 19:22:21', '2017-01-11 19:23:20', '1');
