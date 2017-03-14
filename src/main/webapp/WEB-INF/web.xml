@@ -24,7 +24,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- 登陆拦截器,针对jsp页面 -->
+    <!-- 登陆【过滤】器,针对jsp页面 -->
     <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>com.amayadream.webchat.filter.LoginFilter</filter-class>
@@ -47,6 +47,16 @@
         <listener-class>com.amayadream.webchat.listener.LoggerListener</listener-class>
     </listener>
 
+    <!--　浏览器不支持put,delete等method,由该filter将/blog?_method=delete转换为标准的http　delete方法　-->
+    <!--  必须放在springMVCDispatcher前面 -->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <servlet-name>SpringMVC</servlet-name>
+    </filter-mapping>
     <!-- Spring MVC servlet -->
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
@@ -63,16 +73,6 @@
         <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
-    <!--　浏览器不支持put,delete等method,由该filter将/blog?_method=delete转换为标准的http　delete方法　-->
-    <filter>
-        <filter-name>HiddenHttpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>HiddenHttpMethodFilter</filter-name>
-        <servlet-name>SpringMVC</servlet-name>
-    </filter-mapping>
 
     <welcome-file-list>
         <welcome-file>/login</welcome-file>

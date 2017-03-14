@@ -38,7 +38,8 @@ public class UploadUtil {
             while(iter.hasNext()){
                 //取得上传文件
                 MultipartFile file = multiRequest.getFile(iter.next());
-                String prefix = fileUtil.getFilePrefix(file);
+                //取得文件后缀
+                String suffix = fileUtil.getFileSuffix(file);
                 if(file != null){
                     //取得当前上传文件的文件名称
                     String myFileName = file.getOriginalFilename();
@@ -46,14 +47,15 @@ public class UploadUtil {
                     if(myFileName.trim() !=""){
                         System.out.println(myFileName);
                         //重命名上传后的文件名
-                        String fileName =  userid + "." + prefix;
-                        //定义上传路径,格式为 upload/Amayadream/Amayadream.jpg
+                        String fileName =  userid + "." + suffix;
+                        //定义上传路径,格式为 upload/{userid}/{userid}.jpg ||folder=upload
                         String path = request.getServletContext().getRealPath("/") + folder + "/" + userid;
                         File localFile = new File(path, fileName);
                         if(!localFile.exists()){
                             localFile.mkdirs();
                         }
                         try {
+                            //转存文件到指定的路径
                             file.transferTo(localFile);
                             file_url = folder + "/" + userid + "/" + fileName;
                         } catch (IOException e) {

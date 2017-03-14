@@ -52,6 +52,7 @@ public class LogServiceImpl implements ILogService {
 
     @Override
     public boolean insert(Log log) {
+        //生成UUID
         log.setId(StringUtil.getGuid());
         return logDao.insert(log);
     }

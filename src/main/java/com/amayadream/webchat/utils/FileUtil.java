@@ -29,10 +29,15 @@ public class FileUtil {
         return attachments;
     }
 
-    public String getFilePrefix(MultipartFile file){
+    /**
+     * 截取文件后缀
+     * @param file
+     * @return
+     */
+    public String getFileSuffix(MultipartFile file){
         String fileName=file.getOriginalFilename();
-        String prefix=fileName.substring(fileName.lastIndexOf(".")+1);
-        return prefix;
+        String suffix=fileName.substring(fileName.lastIndexOf(".")+1);
+        return suffix;
     }
 
 }

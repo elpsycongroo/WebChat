@@ -25,7 +25,7 @@ import java.io.IOException;
  * TODO   :  用户控制器
  */
 @Controller
-@SessionAttributes("userid")
+@SessionAttributes("userid")//将ModelMap中的userid转存到session中以便跨request访问
 public class UserController {
     @Resource private User user;
     @Resource private IUserService userService;
@@ -42,8 +42,9 @@ public class UserController {
 
     /**
      * 显示个人信息页面
+     * 指定请求的类型为GET
      */
-    @RequestMapping(value = "{userid}", method = RequestMethod.GET)
+    @RequestMapping(value = "{userid}", method = RequestMethod.GET)//参数中使用@ModelAttribute注解将之前存储于session中的属性绑定到方法的入参
     public ModelAndView selectUserByUserid(@PathVariable("userid") String userid, @ModelAttribute("userid") String sessionid){
         ModelAndView view = new ModelAndView("information");
         user = userService.selectUserByUserid(userid);
@@ -57,16 +58,18 @@ public class UserController {
      * @param sessionid
      * @return
      */
-    @RequestMapping(value = "{userid}/config")
+    @RequestMapping(value = "{userid}/config")//参数中使用@ModelAttribute注解将之前存储于session中的属性绑定到方法的入参
     public ModelAndView setting(@PathVariable("userid") String userid, @ModelAttribute("userid") String sessionid){
         ModelAndView view = new ModelAndView("info-setting");
         user = userService.selectUserByUserid(userid);
+        //将user 装入模型中在jsp回显 装入session中亦可
         view.addObject("user", user);
         return view;
     }
 
     /**
      * 更新用户信息
+     * 限定使用POST
      * @param userid
      * @param sessionid
      * @param user
@@ -78,6 +81,7 @@ public class UserController {
         boolean flag = userService.update(user);
         if(flag){
             logService.insert(logUtil.setLog(userid, date.getTime24(), defined.LOG_TYPE_UPDATE, defined.LOG_DETAIL_UPDATE_PROFILE, netUtil.getIpAddress(request)));
+            //传递到jsp页面后从session中删除下列信息
             attributes.addFlashAttribute("message", "["+userid+"]资料更新成功!");
         }else{
             attributes.addFlashAttribute("error", "["+userid+"]资料更新失败!");
