@@ -28,11 +28,13 @@ public class LogServiceImpl implements ILogService {
 
     @Override
     public List<Log> selectLogByUserid(String userid, int page, int pageSize) {
-        int start = 1;
+        //修改整体逻辑到第一行开始
+        int start = 0;
         int end = pageSize;
         if(page != 1) {
-            start = pageSize * (page - 1) + 1;
-            end = pageSize * page;
+            start = pageSize * (page - 1) ;
+            //此处逻辑有误 修改为pageSize
+            end = pageSize ;
         }
         return logDao.selectLogByUserid(userid, start, end);
     }

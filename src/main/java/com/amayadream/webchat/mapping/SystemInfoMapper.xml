@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.amayadream.webchat.dao.ISystemInfoDao">
+
+  <resultMap id="BaseResultMap" type="com.amayadream.webchat.pojo.SystemInfo">
+    <id column="SYSINFOID" property="sysinfoid" jdbcType="INTEGER"/>
+    <result column="USERID" property="userid" jdbcType="VARCHAR"/>
+    <result column="PAGESIZE" property="pagesize" jdbcType="INTEGER"/>
+    <result column="ONLINESHOW" property="onlineshow" jdbcType="INTEGER"/>
+    <result column="MYINFO" property="myinfo" jdbcType="INTEGER"/>
+    <result column="FRIENDSTIP" property="friendstip" jdbcType="INTEGER"/>
+  </resultMap>
+
+  <select id="selectSystemInfoByUserId" resultMap="BaseResultMap">
+    SELECT SYSINFOID,PAGESIZE,ONLINESHOW,MYINFO,FRIENDSTIP FROM system_info
+    WHERE USERID = #{userid};
+  </select>
+
+  <insert id="insertOrUpdate" parameterType="com.amayadream.webchat.pojo.SystemInfo">
+    <selectKey keyProperty="count" resultType="int" order="BEFORE">
+      SELECT count(*) FROM system_info WHERE USERID = #{userid}
+    </selectKey>
+    <if test="count > 0">
+      UPDATE system_info
+      <set>
+        <if test="PAGESIZE != null AND PAGESIZE != ''">
+          PAGESIZE = #{pagesize}
+        </if>
+        <if test="ONLINESHOW != null AND ONLINESHOW != ''">
+          ONLINESHOW = #{onlineshow}
+        </if>
+        <if test="MYINFO != null AND MYINFO != ''">
+          MYINFO = #{myinfo}
+        </if>
+        <if test="FRIENDSTIP != null AND FRIENDSTIP != ''">
+          FRIENDSTIP = #{friendstip}
+        </if>
+      </set>
+      WHERE USERID = #{userid};
+    </if>
+    <if test="count == 0">
+      INSERT INTO system_info (SYSINFOID,USERID,PAGESIZE,ONLINESHOW,MYINFO,FRIENDSTIP)
+      VALUES (#{sysinfoid},#{userid},#{pagesize},#{onlineshow},#{myinfo},#{friendstip});
+    </if>
+  </insert>
+
+</mapper>

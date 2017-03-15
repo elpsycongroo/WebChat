@@ -21,28 +21,26 @@
         <div class="am-tabs am-margin" data-am-tabs>
             <ul class="am-tabs-nav am-nav am-nav-tabs">
                 <li class="am-active"><a href="#tab1">基本设置</a></li>
-                <li><a href="#tab2">修改头像</a></li>
-                <li><a href="#tab3">修改密码</a></li>
             </ul>
 
             <div class="am-tabs-bd">
                 <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-                    <form class="am-form am-form-horizontal">
+                    <form class="am-form am-form-horizontal" action="${ctx}/${userid}/updateSystem-setting" method="post">
                         <div class="am-form-group">
                             <label class="am-u-sm-2 am-form-label">分页大小</label>
                             <div class="am-u-sm-10">
                                 <div class="am-btn-group" data-am-button>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 5
+                                        <input type="radio" name="pagesize" id="option1" value="5"> 5
                                     </label>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 10
+                                        <input type="radio" name="pagesize" id="option2" value="10"> 10
                                     </label>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 15
+                                        <input type="radio" name="pagesize" id="option3" value="15"> 15
                                     </label>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 20
+                                        <input type="radio" name="pagesize" id="option4" value="20"> 20
                                     </label>
                                 </div>
                             </div>
@@ -53,10 +51,10 @@
                             <div class="am-u-sm-10">
                                 <div class="am-btn-group" data-am-button>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 提示
+                                        <input type="radio" name="friendstip" id="option5" value="1"> 提示
                                     </label>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 不提示
+                                        <input type="radio" name="friendstip" id="option6" value="2"> 不提示
                                     </label>
                                 </div>
                             </div>
@@ -67,10 +65,10 @@
                             <div class="am-u-sm-10">
                                 <div class="am-btn-group" data-am-button>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 显示
+                                        <input type="radio" name="onlineshow" id="option7" value="1"> 显示
                                     </label>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 不显示
+                                        <input type="radio" name="onlineshow" id="option8" value="2"> 不显示
                                     </label>
                                 </div>
                             </div>
@@ -81,10 +79,10 @@
                             <div class="am-u-sm-10">
                                 <div class="am-btn-group" data-am-button>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 允许被查看
+                                        <input type="radio" name="myinfo" id="option9" value="1"> 允许被查看
                                     </label>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
-                                        <input type="radio" name="options"> 不允许查看
+                                        <input type="radio" name="myinfo" id="option10" value="2"> 不允许查看
                                     </label>
                                 </div>
                             </div>
@@ -96,64 +94,6 @@
                         </div>
                     </form>
                 </div>
-
-                <div class="am-tab-panel am-fade" id="tab2">
-                    <form class="am-form am-form-horizontal" style="text-align: center;">
-                        <div style="text-align: center;margin-bottom: 10px">
-                            <img class="am-circle" src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/1000/h/1000/q/80" width="140" height="140" alt="Amayadream"/>
-                        </div>
-                        <div class="am-form-group am-form-file">
-                            <button type="button" class="am-btn am-btn-secondary am-btn-sm">
-                                <i class="am-icon-cloud-upload"></i> 选择要上传的文件</button>
-                            <input id="doc-form-file" type="file" multiple>
-                        </div>
-                        <div id="file-list"></div>
-                        <button class="am-btn am-round am-btn-success"><span class="am-icon-upload"></span> 上传头像</button>
-                        <script>
-                            $(function() {
-                                $('#doc-form-file').on('change', function() {
-                                    var fileNames = '';
-                                    $.each(this.files, function() {
-                                        fileNames += '<span class="am-badge">' + this.name + '</span> ';
-                                    });
-                                    $('#file-list').html(fileNames);
-                                });
-                            });
-                        </script>
-                    </form>
-                </div>
-
-                <div class="am-tab-panel am-fade" id="tab3">
-                    <form class="am-form am-form-horizontal">
-                        <div class="am-form-group">
-                            <label for="password1" class="am-u-sm-2 am-form-label">原密码</label>
-                            <div class="am-u-sm-10">
-                                <input type="password" id="password1" required placeholder="请输入原密码...">
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label for="password2" class="am-u-sm-2 am-form-label">新密码</label>
-                            <div class="am-u-sm-10">
-                                <input type="password" id="password2" required placeholder="请输入新密码...">
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label for="password3" class="am-u-sm-2 am-form-label">新密码</label>
-                            <div class="am-u-sm-10">
-                                <input type="password" id="password3" required placeholder="请确认新密码...">
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <div class="am-u-sm-10 am-u-sm-offset-2">
-                                <button type="submit" class="am-btn am-round am-btn-success"><span class="am-icon-send"></span> 提交修改</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
             </div>
         </div>
 
@@ -164,5 +104,18 @@
     <span class="am-icon-btn am-icon-th-list"></span>
 </a>
 <jsp:include page="include/footer.jsp"/>
+<script>
+    if("${message}"){
+        layer.msg('${message}', {
+            offset: 0,
+        });
+    }
+    if("${error}"){
+        layer.msg('${error}', {
+            offset: 0,
+            shift: 6
+        });
+    }
+</script>
 </body>
 </html>

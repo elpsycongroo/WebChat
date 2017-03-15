@@ -27,10 +27,13 @@ public class LogController {
     public ModelAndView selectAll(@PathVariable("userid") String userid, @RequestParam(defaultValue = "1") int page) {
         int pageSize = 5;
         ModelAndView view = new ModelAndView("log");
+        //此处原分页逻辑存在问题.详见service
         List<Log> list = logService.selectLogByUserid(userid, page, pageSize);
         int count = logService.selectCountByUserid(userid, pageSize);
         view.addObject("list", list);
         view.addObject("count", count);
+        view.addObject("page",page);
+        view.addObject("pageSize",pageSize);
         return view;
     }
 

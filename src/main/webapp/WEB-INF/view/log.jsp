@@ -31,7 +31,8 @@
                 <tbody>
                     <c:forEach items="${list}" var="log" varStatus="status">
                         <tr>
-                            <td>${status.index + 1}</td>
+                            <!-- 修改为能够显示总ID数 -->
+                            <td>${status.index + (page-1)*pageSize + 1}</td>
                             <td>${log.userid}</td>
                             <td>${log.time}</td>
                             <td>${log.type}</td>

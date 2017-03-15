@@ -5,7 +5,7 @@
 <head>
     <title>WebChat | 聊天</title>
     <jsp:include page="include/commonfile.jsp"/>
-    <script src="${ctx}/plugins/sockjs/sockjs.js"></script>
+    <script src="${ctx}/static/plugins/sockjs/sockjs.js"></script>
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
