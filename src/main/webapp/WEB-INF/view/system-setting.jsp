@@ -28,7 +28,7 @@
                     <form class="am-form am-form-horizontal" action="${ctx}/${userid}/updateSystem-setting" method="post">
                         <div class="am-form-group">
                             <label class="am-u-sm-2 am-form-label">分页大小</label>
-                            <div class="am-u-sm-10">
+                            <div class="am-u-sm-10" id="pagesize">
                                 <div class="am-btn-group" data-am-button>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
                                         <input type="radio" name="pagesize" id="option1" value="5"> 5
@@ -45,10 +45,13 @@
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            $("[value='${systemInfo.pagesize}']").parent().addClass('am-active');
+                        </script>
 
                         <div class="am-form-group">
                             <label class="am-u-sm-2 am-form-label">好友进出提示</label>
-                            <div class="am-u-sm-10">
+                            <div class="am-u-sm-10" id="friends">
                                 <div class="am-btn-group" data-am-button>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
                                         <input type="radio" name="friendstip" id="option5" value="1"> 提示
@@ -59,10 +62,12 @@
                                 </div>
                             </div>
                         </div>
-
+                        <script>
+                            $("[value='${systemInfo.friendstip}'][name='friendstip']").parent().addClass('am-active');
+                        </script>
                         <div class="am-form-group">
                             <label class="am-u-sm-2 am-form-label">在线人数显示</label>
-                            <div class="am-u-sm-10">
+                            <div class="am-u-sm-10"  id="online">
                                 <div class="am-btn-group" data-am-button>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
                                         <input type="radio" name="onlineshow" id="option7" value="1"> 显示
@@ -73,10 +78,12 @@
                                 </div>
                             </div>
                         </div>
-
+                        <script>
+                            $("[value='${systemInfo.onlineshow}'][name='onlineshow']").parent().addClass('am-active');
+                        </script>
                         <div class="am-form-group">
                             <label class="am-u-sm-2 am-form-label">我的信息</label>
-                            <div class="am-u-sm-10">
+                            <div class="am-u-sm-10" id="myinfo">
                                 <div class="am-btn-group" data-am-button>
                                     <label class="am-btn am-btn-secondary am-btn-sm">
                                         <input type="radio" name="myinfo" id="option9" value="1"> 允许被查看
@@ -87,6 +94,9 @@
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            $("[value='${systemInfo.myinfo}'][name='myinfo']").parent().addClass('am-active');
+                        </script>
                         <div class="am-form-group">
                             <div class="am-u-sm-10 am-u-sm-offset-2">
                                 <button type="submit" class="am-btn am-round am-btn-success"><span class="am-icon-send"></span> 提交</button>
@@ -107,7 +117,7 @@
 <script>
     if("${message}"){
         layer.msg('${message}', {
-            offset: 0,
+            offset: 0
         });
     }
     if("${error}"){

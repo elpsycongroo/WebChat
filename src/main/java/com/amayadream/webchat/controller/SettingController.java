@@ -48,18 +48,17 @@ public class SettingController {
     }
 
     @RequestMapping(value = "{userid}/updateSystem-setting", method = RequestMethod.POST)
-    public ModelAndView updateSystemSetting(@PathVariable("userid") String userid, SystemInfo systemInfo, RedirectAttributes attributes, NetUtil netUtil, LogUtil logUtil, CommonDate date, WordDefined defined, HttpServletRequest request) {
-        ModelAndView view = new ModelAndView("system-setting");
+    public String updateSystemSetting(@PathVariable("userid") String userid, SystemInfo systemInfo, RedirectAttributes attributes, NetUtil netUtil, LogUtil logUtil, CommonDate date, WordDefined defined, HttpServletRequest request) {
+//      ModelAndView view = new ModelAndView("system-setting");
         try {
-            systemInfo.setUserid(userid);
             systemInfoService.saveOrUpdateSystemSettings(systemInfo);
             logService.insert(logUtil.setLog(userid,date.getTime24(),defined.LOG_TYPE_UPDATE,defined.LOG_DETAIL_UPDATE_SYSINFO,netUtil.getIpAddress(request)));
             attributes.addFlashAttribute("message", "["+userid+"]系统设置更新成功!");
         }catch (Exception e) {
             e.printStackTrace();
-            attributes.addFlashAttribute("message", "[" + userid + "]系统设置更新失败!");
+            attributes.addFlashAttribute("error", "[" + userid + "]系统设置更新失败!");
         }
-        return view;
+        return "redirect:/{userid}/system-setting";
     }
 
 
