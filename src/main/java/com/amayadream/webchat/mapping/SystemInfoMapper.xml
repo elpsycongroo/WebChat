@@ -16,32 +16,28 @@
     WHERE USERID = #{userid};
   </select>
 
-  <insert id="insertOrUpdate" parameterType="com.amayadream.webchat.pojo.SystemInfo">
-    <selectKey keyProperty="count" resultType="int" order="BEFORE">
-      SELECT count(*) FROM system_info WHERE USERID = #{userid}
-    </selectKey>
-    <if test="count > 0">
+  <update id="updateSettings">
       UPDATE system_info
       <set>
-        <if test="PAGESIZE != null AND PAGESIZE != ''">
-          PAGESIZE = #{pagesize}
+        <if test="pagesize != null and pagesize != ''">
+          PAGESIZE = #{pagesize},
         </if>
-        <if test="ONLINESHOW != null AND ONLINESHOW != ''">
-          ONLINESHOW = #{onlineshow}
+        <if test="onlineshow != null and onlineshow != ''">
+          ONLINESHOW = #{onlineshow},
         </if>
-        <if test="MYINFO != null AND MYINFO != ''">
-          MYINFO = #{myinfo}
+        <if test="myinfo != null and myinfo != ''">
+          MYINFO = #{myinfo},
         </if>
-        <if test="FRIENDSTIP != null AND FRIENDSTIP != ''">
+        <if test="friendstip != null and friendstip != ''">
           FRIENDSTIP = #{friendstip}
         </if>
       </set>
       WHERE USERID = #{userid};
-    </if>
-    <if test="count == 0">
+  </update>
+  <insert id="insertSettings" parameterType="com.amayadream.webchat.pojo.SystemInfo">
       INSERT INTO system_info (SYSINFOID,USERID,PAGESIZE,ONLINESHOW,MYINFO,FRIENDSTIP)
       VALUES (#{sysinfoid},#{userid},#{pagesize},#{onlineshow},#{myinfo},#{friendstip});
-    </if>
   </insert>
+
 
 </mapper>

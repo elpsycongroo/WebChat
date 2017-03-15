@@ -52,7 +52,7 @@ public class SettingController {
         ModelAndView view = new ModelAndView("system-setting");
         try {
             systemInfo.setUserid(userid);
-            systemInfoService.updateSystemSettings(systemInfo);
+            systemInfoService.saveOrUpdateSystemSettings(systemInfo);
             logService.insert(logUtil.setLog(userid,date.getTime24(),defined.LOG_TYPE_UPDATE,defined.LOG_DETAIL_UPDATE_SYSINFO,netUtil.getIpAddress(request)));
             attributes.addFlashAttribute("message", "["+userid+"]系统设置更新成功!");
         }catch (Exception e) {

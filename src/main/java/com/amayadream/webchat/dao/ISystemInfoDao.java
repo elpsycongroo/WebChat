@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 @Service(value="systemInfoDao")
 public interface ISystemInfoDao {
 
-    int insertOrUpdate(SystemInfo systemInfo);
+    int insertSettings(SystemInfo systemInfo);
 
     SystemInfo selectSystemInfoByUserId(String userid);
+
+    int updateSettings(SystemInfo systemInfo);
 
 }

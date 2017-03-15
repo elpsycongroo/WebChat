@@ -14,7 +14,7 @@ public class SystemInfo {
     private  Integer onlineshow;
     private  Integer myinfo;
     private  String userid;
-    private  Integer friendsinfo;
+    private  Integer friendstip;
 
     public Integer getPagesize() {
         return pagesize;
@@ -56,11 +56,11 @@ public class SystemInfo {
         this.sysinfoid = sysinfoid;
     }
 
-    public Integer getFriendsinfo() {
-        return friendsinfo;
+    public Integer getFriendstip() {
+        return friendstip;
     }
 
-    public void setFriendsinfo(Integer friendsinfo) {
-        this.friendsinfo = friendsinfo;
+    public void setFriendstip(Integer friendstip) {
+        this.friendstip = friendstip;
     }
 }

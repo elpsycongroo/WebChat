@@ -8,6 +8,6 @@ import com.amayadream.webchat.pojo.SystemInfo;
 
 
 public interface ISystemInfoService {
-    int updateSystemSettings(SystemInfo systemInfo);
+    int saveOrUpdateSystemSettings(SystemInfo systemInfo);
     SystemInfo findSystemSettingsById(String userid);
 }

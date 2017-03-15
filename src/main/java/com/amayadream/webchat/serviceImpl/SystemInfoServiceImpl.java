@@ -16,10 +16,17 @@ public class SystemInfoServiceImpl implements ISystemInfoService {
 
     @Resource
     private ISystemInfoDao systemInfoDao;
+    @Resource
+    private SystemInfo info;
 
     @Override
-    public int updateSystemSettings(SystemInfo systemInfo) {
-        return systemInfoDao.insertOrUpdate(systemInfo);
+    public int saveOrUpdateSystemSettings(SystemInfo systemInfo) {
+        String userid = systemInfo.getUserid();
+        info = systemInfoDao.selectSystemInfoByUserId(userid);
+        if(info == null){
+            return systemInfoDao.insertSettings(systemInfo);
+        }
+        return systemInfoDao.updateSettings(systemInfo);
     }
 
     @Override
