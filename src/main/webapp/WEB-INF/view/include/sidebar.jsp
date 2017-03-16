@@ -14,7 +14,7 @@
                     <li><a href="${ctx}/${userid}/system-setting"><span class="am-icon-cog"></span> 系统设置</a></li>
                 </ul>
             </li>
-            <li><a href="${ctx}/${userid}/log"><span class="am-icon-inbox"></span> 系统日志<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
+            <li><a href="${ctx}/${userid}/log"><span class="am-icon-inbox"></span> 系统日志<span class="am-badge am-badge-secondary am-margin-right am-fr">${logCount}</span></a></li>
             <li><a href="${ctx}/help"><span class="am-icon-globe"></span> 帮助</a></li>
             <li><a href="${ctx}/about"><span class="am-icon-leaf"></span> 关于</a></li>
             <li><a href="${ctx}/user/logout"><span class="am-icon-sign-out"></span> 注销</a></li>

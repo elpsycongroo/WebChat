@@ -63,6 +63,8 @@ public class LoginController {
                     userService.update(user);
                     systemInfo = systemInfoService.findSystemSettingsById(userid);
                     session.setAttribute("systemInfo",systemInfo);
+                    int logCount = logService.selectCountByUserid(userid,1);
+                    session.setAttribute("logCount",logCount);
                     attributes.addFlashAttribute("message", defined.LOGIN_SUCCESS);
                     return "redirect:/chat";
                 }
