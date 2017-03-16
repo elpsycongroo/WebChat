@@ -16,6 +16,16 @@ public class SystemInfo {
     private  String userid;
     private  Integer friendstip;
 
+    public SystemInfo(){}
+
+    public SystemInfo(Integer pagesize, Integer onlineshow, Integer myinfo, String userid, Integer friendstip) {
+        this.pagesize = pagesize;
+        this.onlineshow = onlineshow;
+        this.myinfo = myinfo;
+        this.userid = userid;
+        this.friendstip = friendstip;
+    }
+
     public Integer getPagesize() {
         return pagesize;
     }

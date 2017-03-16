@@ -1,8 +1,10 @@
 package com.amayadream.webchat.controller;
 
 import com.amayadream.webchat.pojo.Log;
+import com.amayadream.webchat.pojo.SystemInfo;
 import com.amayadream.webchat.pojo.User;
 import com.amayadream.webchat.service.ILogService;
+import com.amayadream.webchat.service.ISystemInfoService;
 import com.amayadream.webchat.service.IUserService;
 import com.amayadream.webchat.utils.CommonDate;
 import com.amayadream.webchat.utils.LogUtil;
@@ -33,6 +35,10 @@ public class LoginController {
     private Log log;
     @Resource
     private ILogService logService;
+    @Resource
+    private ISystemInfoService systemInfoService;
+    @Resource
+    private SystemInfo systemInfo;
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(String userid, String password, HttpSession session, RedirectAttributes attributes,
@@ -55,6 +61,8 @@ public class LoginController {
                     session.setAttribute("login_status", true);
                     user.setLasttime(date.getTime24());
                     userService.update(user);
+                    systemInfo = systemInfoService.findSystemSettingsById(userid);
+                    session.setAttribute("systemInfo",systemInfo);
                     attributes.addFlashAttribute("message", defined.LOGIN_SUCCESS);
                     return "redirect:/chat";
                 }

@@ -32,4 +32,18 @@ public class WordDefined {
     public String LOG_DETAIL_SYSCONFIG = "系统设置";
     public String LOG_DETAIL_UPDATE_PASSWORD = "更新密码";
     public String LOG_DETAIL_UPDATE_SYSINFO = "更新系统设置";
+
+    public int SYSTEMINFO_PAGESIZE_FIVE = 5;
+    public int SYSTEMINFO_PAGESIZE_TEN = 10;
+    public int SYSTEMINFO_PAGESIZE_FIFTEEN = 15;
+    public int SYSTEMINFO_PAGESIZE_TWENTY = 20;
+
+    public int SYSTEMINFO_FRIENDSTIP_YES = 1;
+    public int SYSTEMINFO_FRIENDSTIP_NO = 2;
+
+    public int SYSTEMINFO_SHOWONLINE_YES = 1;
+    public int SYSTEMINFO_SHOWONLINE_NO = 2;
+
+    public int SYSTEMINFO_MYINFO_YES = 1;
+    public int SYSTEMINFO_MYINFO_NO = 2;
 }

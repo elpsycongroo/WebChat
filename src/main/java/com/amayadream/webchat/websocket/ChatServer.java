@@ -2,7 +2,10 @@ package com.amayadream.webchat.websocket;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.amayadream.webchat.pojo.SystemInfo;
+import com.amayadream.webchat.service.ISystemInfoService;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -28,6 +31,7 @@ public class ChatServer {
 
     private static List list = new ArrayList<>();   //在线列表,记录用户名称
     private static Map routetab = new HashMap<>();  //用户名和websocket的session绑定的路由表
+
 
     /**
      * 连接建立成功调用的方法

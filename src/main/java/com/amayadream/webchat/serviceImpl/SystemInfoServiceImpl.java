@@ -3,6 +3,7 @@ package com.amayadream.webchat.serviceImpl;
 import com.amayadream.webchat.dao.ISystemInfoDao;
 import com.amayadream.webchat.pojo.SystemInfo;
 import com.amayadream.webchat.service.ISystemInfoService;
+import com.amayadream.webchat.utils.WordDefined;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,18 +20,22 @@ public class SystemInfoServiceImpl implements ISystemInfoService {
     @Resource
     private SystemInfo info;
 
+    WordDefined wordDefined = new WordDefined();
+
     @Override
     public int saveOrUpdateSystemSettings(SystemInfo systemInfo) {
         String userid = systemInfo.getUserid();
         info = systemInfoDao.selectSystemInfoByUserId(userid);
-        if(info == null){
-            return systemInfoDao.insertSettings(systemInfo);
-        }
         return systemInfoDao.updateSettings(systemInfo);
     }
 
     @Override
     public SystemInfo findSystemSettingsById(String userid) {
-        return systemInfoDao.selectSystemInfoByUserId(userid);
+        info = systemInfoDao.selectSystemInfoByUserId(userid);
+        if(info == null){
+            info = new SystemInfo(wordDefined.SYSTEMINFO_PAGESIZE_FIVE,wordDefined.SYSTEMINFO_FRIENDSTIP_YES,wordDefined.SYSTEMINFO_SHOWONLINE_YES,userid,wordDefined.SYSTEMINFO_MYINFO_YES);
+            systemInfoDao.insertSettings(info);
+        }
+        return info;
     }
 }

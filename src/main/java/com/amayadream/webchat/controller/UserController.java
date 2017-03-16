@@ -1,7 +1,9 @@
 package com.amayadream.webchat.controller;
 
+import com.amayadream.webchat.pojo.SystemInfo;
 import com.amayadream.webchat.pojo.User;
 import com.amayadream.webchat.service.ILogService;
+import com.amayadream.webchat.service.ISystemInfoService;
 import com.amayadream.webchat.service.IUserService;
 import com.amayadream.webchat.utils.*;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,8 @@ import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.Path;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,13 +34,18 @@ public class UserController {
     @Resource private User user;
     @Resource private IUserService userService;
     @Resource private ILogService logService;
+    @Resource private SystemInfo systemInfo;
+    @Resource private ISystemInfoService systemInfoService;
 
     /**
      * 聊天主页
      */
     @RequestMapping(value = "chat")
-    public ModelAndView getIndex(){
+    public ModelAndView getIndex(HttpSession session){
         ModelAndView view = new ModelAndView("index");
+        if(session.getAttribute("userview") != null){
+            session.removeAttribute("userview");
+        }
         return view;
     }
 
@@ -44,7 +53,7 @@ public class UserController {
      * 显示个人信息页面
      * 指定请求的类型为GET
      */
-    @RequestMapping(value = "{userid}", method = RequestMethod.GET)//参数中使用@ModelAttribute注解将之前存储于session中的属性绑定到方法的入参
+    @RequestMapping(value = "{userid}/info", method = RequestMethod.GET)//参数中使用@ModelAttribute注解将之前存储于session中的属性绑定到方法的入参
     public ModelAndView selectUserByUserid(@PathVariable("userid") String userid, @ModelAttribute("userid") String sessionid){
         ModelAndView view = new ModelAndView("information");
         user = userService.selectUserByUserid(userid);
@@ -64,6 +73,28 @@ public class UserController {
         user = userService.selectUserByUserid(userid);
         //将user 装入模型中在jsp回显 装入session中亦可
         view.addObject("user", user);
+        return view;
+    }
+
+    /**
+     * 查看用户信息
+     * @param userid
+     * @return
+     */
+    @RequestMapping(value = "{userid}/link-to-user-home")
+    public ModelAndView showUserInfo(@PathVariable("userid") String userid,HttpSession session,WordDefined defined,HttpServletRequest req){
+        ModelAndView view = new ModelAndView("userinfo");
+        systemInfo = systemInfoService.findSystemSettingsById(userid);
+        String infoUserId = (String)session.getAttribute("userid");
+        if(!infoUserId.equals(userid) && systemInfo.getMyinfo() == defined.SYSTEMINFO_MYINFO_NO){
+            req.setAttribute("error","["+userid+"]设置了不允许查看资料！");
+            return view;
+        }
+        user = userService.selectUserByUserid(userid);
+        session.setAttribute("userview",user);
+        if(infoUserId.equals(userid)) {
+            req.setAttribute("message", "这是你自己");
+        }
         return view;
     }
 
@@ -96,7 +127,7 @@ public class UserController {
      * @param newpass
      * @return
      */
-    @RequestMapping(value = "{userid}/pass", method = RequestMethod.POST)
+    @RequestMapping(value = "/{userid}/pass", method = RequestMethod.POST)
     public String changePassword(@PathVariable("userid") String userid, String oldpass, String newpass, RedirectAttributes attributes,
                                  NetUtil netUtil, LogUtil logUtil, CommonDate date, WordDefined defined, HttpServletRequest request){
         user = userService.selectUserByUserid(userid);

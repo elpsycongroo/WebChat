@@ -221,11 +221,15 @@
 
     /**
      * 展示提示信息
+     * 如果设置没有明确不提示则提示上线信息
+     * 过滤自己的上线信息
      */
     function showNotice(notice){
-        $("#chat").append("<div><p class=\"am-text-success\" style=\"text-align:center\"><span class=\"am-icon-bell\"></span> "+notice+"</p></div>");
-        var chat = $("#chat-view");
-        chat.scrollTop(chat[0].scrollHeight);   //让聊天区始终滚动到最下面
+        if(${systemInfo.friendstip} != 2 || notice.indexOf("${userid}") > 0) {
+            $("#chat").append("<div><p class=\"am-text-success\" style=\"text-align:center\"><span class=\"am-icon-bell\"></span> " + notice + "</p></div>");
+            var chat = $("#chat-view");
+            chat.scrollTop(chat[0].scrollHeight);   //让聊天区始终滚动到最下面
+        }
     }
 
     /**
@@ -234,7 +238,8 @@
     function showChat(message){
         var to = message.to == null || message.to == ""? "全体成员" : message.to;   //获取接收人
         var isSef = '${userid}' == message.from ? "am-comment-flip" : "";   //如果是自己则显示在右边,他人信息显示在左边
-        var html = "<li class=\"am-comment "+isSef+" am-comment-primary\"><a href=\"#link-to-user-home\"><img width=\"48\" height=\"48\" class=\"am-comment-avatar\" alt=\"\" src=\"${ctx}/"+message.from+"/head\"></a><div class=\"am-comment-main\">\n" +
+        var link = message.from + "\\"+"link-to-user-home";
+        var html = "<li class=\"am-comment "+isSef+" am-comment-primary\"><a href=\"\\WebChat\\"+message.from+"\\link-to-user-home\"><img width=\"48\" height=\"48\" class=\"am-comment-avatar\" alt=\"\" src=\"${ctx}/"+message.from+"/head\"></a><div class=\"am-comment-main\">\n" +
                 "<header class=\"am-comment-hd\"><div class=\"am-comment-meta\">   <a class=\"am-comment-author\" href=\"#link-to-user\">"+message.from+"</a> 发表于<time> "+message.time+"</time> 发送给: "+to+" </div></header><div class=\"am-comment-bd\"> <p>"+message.content+"</p></div></div></li>";
         $("#chat").append(html);
         $("#message").val("");  //清空输入区
@@ -254,7 +259,11 @@
             }
             $("#list").append(li);
         });
-        $("#onlinenum").text($("#list li").length);     //获取在线人数
+        if(${systemInfo.onlineshow} != 2) {
+            $("#onlinenum").text($("#list li").length);     //获取在线人数
+        }else{
+            $("#onlinenum").text("*");
+        }
     }
 
     /**
