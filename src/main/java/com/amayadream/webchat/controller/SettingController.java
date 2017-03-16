@@ -53,10 +53,10 @@ public class SettingController {
         try {
             systemInfoService.saveOrUpdateSystemSettings(systemInfo);
             logService.insert(logUtil.setLog(userid,date.getTime24(),defined.LOG_TYPE_UPDATE,defined.LOG_DETAIL_UPDATE_SYSINFO,netUtil.getIpAddress(request)));
-            attributes.addFlashAttribute("message", "["+userid+"]系统设置更新成功!");
+            attributes.addFlashAttribute("message", "["+userid+"]系统设置更新成功,重新登录后生效！");
         }catch (Exception e) {
             e.printStackTrace();
-            attributes.addFlashAttribute("error", "[" + userid + "]系统设置更新失败!");
+            attributes.addFlashAttribute("error", "[" + userid + "]系统设置更新失败!请至少修改一项或联系管理员");
         }
         return "redirect:/{userid}/system-setting";
     }
